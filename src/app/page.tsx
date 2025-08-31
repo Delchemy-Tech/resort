@@ -235,9 +235,10 @@ const Header = ({ headerData }: { headerData: Section | null }) => {
 const HeroSection = ({ heroData }: { heroData: Section | null }) => {
   // Default values if no data from database
   const defaultData = {
-    title: 'Find Your Best Villa House And Apartment',
-    subtitle: 'Discover luxury villas and apartments for your perfect getaway',
-    background_image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
+    top_title: 'Find Your Best',
+    title: 'Villa House And Apartment',
+    sub_title: 'Discover luxury villas and apartments for your perfect getaway',
+    image_1: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
     search_form: {
       location_placeholder: 'Location',
       checkin_placeholder: 'Check in',
@@ -252,20 +253,27 @@ const HeroSection = ({ heroData }: { heroData: Section | null }) => {
   
   return (
     <section className="relative h-screen bg-cover bg-center" style={{
-      backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("${data.background_image || defaultData.background_image}")`
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("${data.image_1 || defaultData.image_1}")`
     }}>
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center text-white max-w-4xl px-4">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            {(data.title || defaultData.title).split(' ').map((word: string, index: number, arr: string[]) => (
-              <React.Fragment key={index}>
-                {word}
-                {index === Math.floor(arr.length / 3) || index === Math.floor((arr.length * 2) / 3) ? <br /> : ' '}
-              </React.Fragment>
-            ))}
+            {data.top_title && (
+              <span className="block text-3xl md:text-4xl font-normal mb-2 opacity-90">
+                {data.top_title}
+              </span>
+            )}
+            <span className="block">
+              {(data.title || defaultData.title).split(' ').map((word: string, index: number, arr: string[]) => (
+                <React.Fragment key={index}>
+                  {word}
+                  {index === Math.floor(arr.length / 3) || index === Math.floor((arr.length * 2) / 3) ? <br /> : ' '}
+                </React.Fragment>
+              ))}
+            </span>
           </h1>
           <p className="text-xl mb-8 opacity-90">
-            {data.subtitle || defaultData.subtitle}
+            {data.sub_title || defaultData.sub_title}
           </p>
           
           {/* Search Form */}
@@ -315,30 +323,50 @@ const HeroSection = ({ heroData }: { heroData: Section | null }) => {
 };
 
 // About Villa Component
-const AboutVilla = () => {
+const AboutVilla = ({ aboutData }: { aboutData?: Section | null }) => {
+  // Default values if no data from database
+  const defaultData = {
+    top_title: 'Discover',
+    title: 'About VillaRent',
+    sub_title: 'Access Only The Finest Villas In The Most Exclusive Destinations. Our carefully curated collection features the world\'s most spectacular luxury villas, each offering unparalleled comfort and breathtaking views.',
+    image_1: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    secondary_description: 'From beachfront paradises to mountain retreats, we provide extraordinary experiences that exceed expectations. Every property is hand-selected for its unique character and exceptional quality.',
+    cta_button: 'Learn More'
+  };
+
+  // Use database data if available, otherwise use defaults
+  const data = aboutData?.section_json || defaultData;
+  
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <img 
-              src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+              src={data.image_1 || defaultData.image_1}
               alt="Luxury Villa" 
               className="w-full h-96 object-cover rounded-lg shadow-lg"
             />
           </div>
           <div>
+            {data.top_title && (
+              <p className="text-yellow-500 font-semibold text-lg mb-2">
+                {data.top_title}
+              </p>
+            )}
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              About VillaRent
+              {data.title || defaultData.title}
             </h2>
             <p className="text-gray-600 mb-6">
-              Access Only The Finest Villas In The Most Exclusive Destinations. Our carefully curated collection features the world's most spectacular luxury villas, each offering unparalleled comfort and breathtaking views.
+              {data.sub_title || defaultData.sub_title}
             </p>
-            <p className="text-gray-600 mb-8">
-              From beachfront paradises to mountain retreats, we provide extraordinary experiences that exceed expectations. Every property is hand-selected for its unique character and exceptional quality.
-            </p>
+            {data.secondary_description && (
+              <p className="text-gray-600 mb-8">
+                {data.secondary_description}
+              </p>
+            )}
             <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-3 rounded-lg font-semibold">
-              Learn More
+              {data.cta_button || defaultData.cta_button}
             </button>
           </div>
         </div>
@@ -651,24 +679,55 @@ const Footer = () => {
 const LuxuryVillaHomepage = () => {
   const [headerData, setHeaderData] = useState<Section | null>(null);
   const [heroData, setHeroData] = useState<Section | null>(null);
+  const [aboutData, setAboutData] = useState<Section | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSectionData = async () => {
       try {
         const resortId = parseInt(process.env.NEXT_PUBLIC_RESORT_ID || '1');
+        console.log('🏨 Resort ID from env:', resortId);
         
-        // Fetch header data (you can adjust section name as needed)
+        // Test database connection first
+        console.log('🔗 Testing database connection...');
+        const connectionTest = await ContentService.testConnection();
+        if (!connectionTest) {
+          console.warn('❌ Database connection failed, using default values');
+          // Still show table information even if connection failed
+          await ContentService.showAllTables();
+          await ContentService.checkAccessibleTables();
+          setLoading(false);
+          return;
+        }
+        
+        // Show all tables in the database
+        await ContentService.showAllTables();
+        await ContentService.checkAccessibleTables();
+        
+        // Check if sample data exists
+        await ContentService.checkSampleData(resortId);
+        
+        // Fetch header data
+        console.log('🗺 Fetching header data...');
         const headerSection = await ContentService.getSectionByName(resortId, 'Header');
         setHeaderData(headerSection);
         
         // Fetch hero section data
+        console.log('🎆 Fetching hero data...');
         const heroSection = await ContentService.getSectionByName(resortId, 'Hero');
         setHeroData(heroSection);
-        console.log('Header data:', );
+        
+        // Fetch about section data
+        console.log('ℹ️ Fetching about data...');
+        const aboutSection = await ContentService.getSectionByName(resortId, 'About');
+        setAboutData(aboutSection);
+        
+        console.log('Header data:', headerData);
+        console.log('Hero data:', heroData);
+        console.log('About data:', aboutSection);
         
       } catch (error) {
-        console.error('Error fetching section data:', error);
+        console.error('💥 Error fetching section data:', error);
       } finally {
         setLoading(false);
       }
@@ -689,7 +748,7 @@ const LuxuryVillaHomepage = () => {
     <div className="min-h-screen">
       <Header headerData={headerData} />
       <HeroSection heroData={heroData} />
-      <AboutVilla />
+      <AboutVilla aboutData={aboutData} />
       <FeaturedProperties />
       <Services />
       <Facilities />

@@ -27,9 +27,10 @@ For the Hero section (`section_name = "Hero"`), the `section_json` field should 
 
 ```json
 {
-  "title": "Find Your Best Villa House And Apartment",
-  "subtitle": "Discover luxury villas and apartments for your perfect getaway",
-  "background_image": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80",
+  "top_title": "Welcome to",
+  "title": "Paradise Resort", 
+  "sub_title": "Experience luxury and tranquility in our exclusive villas",
+  "image_1": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80",
   "search_form": {
     "location_placeholder": "Location",
     "checkin_placeholder": "Check in",
