@@ -1,4 +1,4 @@
-import { supabase, Section } from '@/lib/supabase'
+import { Section, supabase } from '@/lib/supabase';
 
 export class ContentService {
   /**
