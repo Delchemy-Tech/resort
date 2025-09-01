@@ -80,12 +80,11 @@ VALUES (
   'About', 
   'content_section',
   '{
-    "top_title": "Discover",
     "title": "About Paradise Resort",
-    "sub_title": "Discover the ultimate luxury experience at Paradise Resort. Our carefully curated collection features the worlds most spectacular villas, each offering unparalleled comfort and breathtaking views.",
-    "image_1": "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "description": "Discover the ultimate luxury experience at Paradise Resort. Our carefully curated collection features the worlds most spectacular villas, each offering unparalleled comfort and breathtaking views.",
     "secondary_description": "From beachfront paradises to mountain retreats, we provide extraordinary experiences that exceed expectations. Every property is hand-selected for its unique character and exceptional quality.",
-    "cta_button": "Discover More"
+    "cta_button": "Discover More",
+    "image": "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
   }'::jsonb,
   'About section describing Paradise Resort'
 );

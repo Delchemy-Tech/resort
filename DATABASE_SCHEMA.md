@@ -23,7 +23,7 @@ create table public.sections (
 
 ## Expected JSON Structure for Hero Section
 
-For the Hero section (`section_name = "Hero"`), the `section_json` field should contain:
+For the Hero section (`section_name = "Hero"`), the `section_json` field should contain the special structure with `top_title`, `title`, `sub_title`, and `image_1`:
 
 ```json
 {
@@ -38,6 +38,20 @@ For the Hero section (`section_name = "Hero"`), the `section_json` field should 
     "guests_placeholder": "Guests",
     "search_button": "Search Properties"
   }
+}
+```
+
+## Expected JSON Structure for About Section
+
+For the About section (`section_name = "About"`), the `section_json` field should use the standard structure:
+
+```json
+{
+  "title": "About Paradise Resort",
+  "description": "Discover the ultimate luxury experience at Paradise Resort. Our carefully curated collection features the world's most spectacular villas, each offering unparalleled comfort and breathtaking views.",
+  "secondary_description": "From beachfront paradises to mountain retreats, we provide extraordinary experiences that exceed expectations. Every property is hand-selected for its unique character and exceptional quality.",
+  "cta_button": "Discover More",
+  "image": "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
 }
 ```
 
