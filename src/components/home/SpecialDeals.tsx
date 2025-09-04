@@ -1,67 +1,57 @@
-"use client";
-import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
-// Mock data types
-interface Deal {
-  id: string;
-  title: string;
-  description: string;
-  discount: string;
-}
+const SpecialDealsSection = () => {
+  const deals = [
+    { id: 1, title: "Extra 5% off" },
+    { id: 2, title: "Extra 5% off" },
+    { id: 3, title: "Extra 5% off" },
+    { id: 4, title: "Extra 5% off" }
+  ];
 
-// Mock data
-const mockDeals: Deal[] = [
-  {
-    id: '1',
-    title: 'Early Bird',
-    description: 'Book 60 days in advance',
-    discount: '25% OFF'
-  },
-  {
-    id: '2',
-    title: 'Extended Stay',
-    description: 'Stay for 7+ nights',
-    discount: '30% OFF'
-  },
-  {
-    id: '3',
-    title: 'Last Minute',
-    description: 'Book within 48 hours',
-    discount: '20% OFF'
-  },
-  {
-    id: '4',
-    title: 'Group Booking',
-    description: 'Book for 8+ guests',
-    discount: '35% OFF'
-  }
-];
-
-const SpecialDeals: React.FC = () => {
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Special Deals
-          </h2>
-          <p className="text-gray-600">
-            Don't miss out on these exclusive offers
-          </p>
+    <div className="bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="flex justify-between items-start mb-12">
+          <div className="max-w-lg">
+            <h1 className="text-5xl font-serif text-gray-900 mb-6 font-normal">Special Deals</h1>
+            <p className="text-gray-500 text-base leading-relaxed">
+              Diam et habitasse tortor cras donec urna eget dolor in turpis<br />
+              venenatis eget pulvinar ipsum quisque non arcu nulla
+            </p>
+          </div>
+          
+          <button className="border-2 border-gray-900 px-8 py-3 text-gray-900 text-sm font-medium tracking-wider flex items-center gap-2 hover:bg-gray-900 hover:text-white transition-colors">
+            VIEW ALL
+            <ArrowRight size={16} />
+          </button>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {mockDeals.map((deal) => (
-            <div key={deal.id} className="bg-gray-100 p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
-              <div className="text-3xl font-bold text-yellow-500 mb-2">{deal.discount}</div>
-              <h3 className="text-xl font-semibold mb-2">{deal.title}</h3>
-              <p className="text-gray-600 text-sm">{deal.description}</p>
+
+        {/* Deals Grid */}
+        <div className="grid grid-cols-4 gap-6">
+          {/* Top Row - 4 cards */}
+          {deals.map((deal) => (
+            <div key={deal.id} className="group relative">
+              {/* Large gray rectangle */}
+              <div className="w-full h-76 bg-gray-400 mb-4"></div>
+              
+              {/* Deal info */}
+              <div className="space-y-3 absolute w-full bottom-10 bg-white p-4">
+                <h3 className="text-xl font-serif text-gray-900 font-normal">
+                  {deal.title}
+                </h3>
+                
+                <button className="text-blue-500 text-sm font-medium tracking-wide flex items-center gap-2 hover:text-blue-600 transition-colors group">
+                  VIEW DETAIL
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default SpecialDeals;
+export default SpecialDealsSection;
