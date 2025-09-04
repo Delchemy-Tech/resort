@@ -168,8 +168,8 @@ const HomePage: React.FC = () => {
       <FeaturedProperties />
       <Services />
       <Facilities />
-      <SpecialDeals />
       <OtherAmenities />
+      <SpecialDeals />
       <Testimonials />
       <LatestBlog />
       <Footer />

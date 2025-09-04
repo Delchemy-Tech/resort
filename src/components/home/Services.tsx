@@ -24,13 +24,13 @@ const StayInComfortSection = () => {
 
   return (
     <div className="bg-gray-50 py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Header Section */}
         <div className="flex justify-between items-start mb-16">
           <div>
             <h1 className="text-5xl font-serif text-black mb-6">Stay In Comfort</h1>
             <p className="text-gray-600 max-w-md text-lg leading-relaxed">
-              Diam et habitasse tortor cras donec urna eget dolor in turpis<br />
+              Diam et habitasse tortor cras donec urna eget dolor in turpis
               venenatis eget pulvinar ipsum quisque non arcu nulla
             </p>
           </div>
