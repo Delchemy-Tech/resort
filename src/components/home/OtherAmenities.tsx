@@ -34,10 +34,10 @@ const OtherAmenities: React.FC = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl font-bold text-gray-900 mb-8">
+        <h2 className="text-4xl lg:text-5xl font-serif font-normal text-gray-900 mb-8">
           Other Amenities
         </h2>
-        <p className="text-gray-600 mb-12 max-w-3xl mx-auto">
+        <p className="text-gray-600 text-lg leading-relaxed mb-12 max-w-3xl mx-auto">
           Enjoy additional luxury amenities including 24/7 concierge service, private beach access, infinity pools, fitness centers, and much more.
         </p>
         
@@ -49,7 +49,7 @@ const OtherAmenities: React.FC = () => {
                 <div className="w-16 h-16 bg-yellow-400 hover:bg-yellow-500 rounded-full mb-3 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 shadow-lg">
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
-                <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors duration-200 font-medium">{amenity.name}</span>
+                <span className="text-sm text-gray-500 group-hover:text-gray-900 transition-colors duration-200 font-medium uppercase tracking-wide">{amenity.name}</span>
               </div>
             );
           })}
