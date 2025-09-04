@@ -27,7 +27,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroData }) => {
   const data = heroData?.section_json || defaultData;
   
   return (
-    <section className="relative h-[calc(100vh-64px)] bg-cover bg-center" style={{
+    <section className="relative h-[100vh] bg-cover bg-center" style={{
       backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("${data.image_1 || defaultData.image_1}")`
     }}>
       <div className="absolute inset-0 flex flex-col justify-center">

@@ -1,54 +1,74 @@
-"use client";
-import React from 'react';
+import { ArrowRight, MapPin } from 'lucide-react';
 
-// Mock data types
-interface Service {
-  id: string;
-  title: string;
-  description: string;
-}
+const StayInComfortSection = () => {
+  const properties = [
+    {
+      id: 1,
+      name: "The Secret Jungle Villa",
+      location: "BALI, INDONESIA",
+      price: "$290,00"
+    },
+    {
+      id: 2,
+      name: "The Secret Jungle Villa",
+      location: "BALI, INDONESIA", 
+      price: "$290,00"
+    },
+    {
+      id: 3,
+      name: "The Secret Jungle Villa",
+      location: "BALI, INDONESIA",
+      price: "$290,00"
+    }
+  ];
 
-// Mock data
-const mockServices: Service[] = [
-  {
-    id: '1',
-    title: '24/7 Concierge',
-    description: 'Round-the-clock personalized service for all your needs'
-  },
-  {
-    id: '2',
-    title: 'Private Chef',
-    description: 'Gourmet dining experiences with world-class chefs'
-  },
-  {
-    id: '3',
-    title: 'Spa Services',
-    description: 'Relaxing treatments and wellness programs'
-  }
-];
-
-const Services: React.FC = () => {
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Our Services
-          </h2>
+    <div className="bg-gray-50 py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header Section */}
+        <div className="flex justify-between items-start mb-16">
+          <div>
+            <h1 className="text-5xl font-serif text-black mb-6">Stay In Comfort</h1>
+            <p className="text-gray-600 max-w-md text-lg leading-relaxed">
+              Diam et habitasse tortor cras donec urna eget dolor in turpis<br />
+              venenatis eget pulvinar ipsum quisque non arcu nulla
+            </p>
+          </div>
+          
+          <button className="bg-yellow-400 px-8 py-3 text-black font-medium tracking-wide flex items-center gap-2 hover:bg-yellow-500 transition-colors">
+            VIEW ALL
+            <ArrowRight size={18} />
+          </button>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {mockServices.map((service, index) => (
-            <div key={service.id} className="text-center p-8">
-              <div className="w-16 h-16 bg-yellow-500 rounded-full mx-auto mb-6"></div>
-              <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
-              <p className="text-gray-600">{service.description}</p>
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-3 gap-8">
+          {properties.map((property) => (
+            <div key={property.id} className="bg-white">
+              {/* Large Gray Rectangle Image Placeholder */}
+              <div className="w-full h-80 bg-gray-400 mb-6"></div>
+              
+              {/* Property Info */}
+              <div className="px-0">
+                <h3 className="text-xl font-serif text-black mb-3">
+                  {property.name}
+                </h3>
+                
+                <div className="flex items-center text-gray-500 text-sm mb-4 tracking-wide">
+                  <MapPin size={16} className="mr-2" />
+                  {property.location}
+                </div>
+                
+                <div className="text-2xl text-orange-500 font-medium">
+                  {property.price}
+                </div>
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default Services;
+export default StayInComfortSection;
