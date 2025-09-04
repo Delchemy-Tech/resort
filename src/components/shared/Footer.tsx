@@ -1,70 +1,201 @@
-"use client";
-import { Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from 'lucide-react';
-import React from 'react';
+import { Facebook, Instagram, MessageCircle, Twitter, Youtube } from "lucide-react";
+import React from "react";
+import { Button } from "../home/ui/button";
 
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 text-white py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 className="text-2xl font-bold mb-4">VillaRent</h3>
-            <p className="text-gray-300 mb-6">
-              Your gateway to the world's most exclusive luxury villa rentals.
+    <footer className="text-white" style={{ backgroundColor: '#222222' }}>
+      {/* CTA Section */}
+      <div className="bg-gray-100 text-gray-900 py-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <div className="max-w-lg">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-normal text-gray-900 mb-4">
+              Speak to us about your travel plans, we're here to help.
+            </h2>
+            <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+              Diam et habitasse tortor cras donec urna eget dolor in turpis venenatis eget pulvinar ipsum quisque non arcu nulla
             </p>
-            <div className="flex space-x-4">
-              <Facebook className="w-6 h-6 text-gray-300 hover:text-yellow-500 cursor-pointer" />
-              <Twitter className="w-6 h-6 text-gray-300 hover:text-yellow-500 cursor-pointer" />
-              <Instagram className="w-6 h-6 text-gray-300 hover:text-yellow-500 cursor-pointer" />
-              <Youtube className="w-6 h-6 text-gray-300 hover:text-yellow-500 cursor-pointer" />
-            </div>
           </div>
           
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-yellow-500">About Us</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-yellow-500">Properties</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-yellow-500">Services</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-yellow-500">Contact</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Destinations</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-yellow-500">Maldives</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-yellow-500">Bali</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-yellow-500">Santorini</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-yellow-500">Dubai</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
-            <div className="space-y-3">
-              <div className="flex items-center">
-                <Phone className="w-5 h-5 mr-3 text-yellow-500" />
-                <span className="text-gray-300">+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-center">
-                <Mail className="w-5 h-5 mr-3 text-yellow-500" />
-                <span className="text-gray-300">info@villarent.com</span>
-              </div>
-              <div className="flex items-center">
-                <MapPin className="w-5 h-5 mr-3 text-yellow-500" />
-                <span className="text-gray-300">New York, NY 10001</span>
-              </div>
-            </div>
-          </div>
+          <Button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium uppercase tracking-wide hover:bg-gray-800 whitespace-nowrap">
+            CHAT WITH US
+            <MessageCircle className="w-4 h-4" />
+          </Button>
         </div>
-        
-        <div className="border-t border-gray-700 mt-12 pt-8 text-center">
-          <p className="text-gray-300">&copy; 2024 VillaRent. All rights reserved.</p>
+      </div>
+
+      {/* Main Footer Content */}
+      <div className="py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Brand and Newsletter Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
+            {/* Brand Section */}
+            <div>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal text-white mb-6">
+                Villague.
+              </h3>
+              <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-md">
+                Diam et habitasse tortor cras donec urna eget dolor in turpis venenatis eget pulvinar ipsum quisque non arcu nulla
+              </p>
+            </div>
+
+            {/* Newsletter Section */}
+            <div>
+              <h3 className="text-xl sm:text-2xl font-serif font-normal text-white mb-4">
+                Join Our Newsletter
+              </h3>
+              <p className="text-gray-400 text-base leading-relaxed mb-6">
+                Diam et habitasse tortor cras donec urna eget dolor in turpis venenatis eget.
+              </p>
+              
+              <div className="flex gap-0 max-w-md">
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="flex-1 px-4 py-3 bg-white text-gray-900 border-0 focus:outline-none text-sm placeholder-gray-500"
+                />
+                <Button className="px-6 py-3 bg-yellow-400 text-gray-900 text-sm font-medium uppercase tracking-wide hover:bg-yellow-500 border-0">
+                  SUBSCRIBES
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Links Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 mb-16">
+            {/* Office */}
+            <div>
+              <h4 className="text-lg font-serif font-normal text-white mb-6">
+                Office
+              </h4>
+              <div className="space-y-3">
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  021 Hollywood Boulevard, LA
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  customer@example.com
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  (021) 345-6789
+                </p>
+              </div>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h4 className="text-lg font-serif font-normal text-white mb-6">
+                Services
+              </h4>
+              <div className="space-y-3">
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Family Experiences
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Events
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Weddings
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Tours
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Menu */}
+            <div>
+              <h4 className="text-lg font-serif font-normal text-white mb-6">
+                Quick Menu
+              </h4>
+              <div className="space-y-3">
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Home
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Services
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  About Us
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Blog
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Contact Us
+                </a>
+              </div>
+            </div>
+
+            {/* Support */}
+            <div>
+              <h4 className="text-lg font-serif font-normal text-white mb-6">
+                Support
+              </h4>
+              <div className="space-y-3">
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Faq
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Privacy & Cookies
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Legal
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Accessibility
+                </a>
+                <a href="#" className="block text-gray-400 text-sm leading-relaxed hover:text-yellow-400 transition-colors">
+                  Sitemap
+                </a>
+              </div>
+            </div>
+
+            {/* Follow Us */}
+            <div>
+              <h4 className="text-lg font-serif font-normal text-white mb-6">
+                Follow Us
+              </h4>
+              <div className="flex gap-4">
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                  style={{ backgroundColor: '#ACB889' }}
+                >
+                  <Facebook className="w-5 h-5 text-gray-900" />
+                </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                  style={{ backgroundColor: '#ACB889' }}
+                >
+                  <Twitter className="w-5 h-5 text-gray-900" />
+                </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                  style={{ backgroundColor: '#ACB889' }}
+                >
+                  <Instagram className="w-5 h-5 text-gray-900" />
+                </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                  style={{ backgroundColor: '#ACB889' }}
+                >
+                  <Youtube className="w-5 h-5 text-gray-900" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="border-t border-gray-600 pt-8">
+            <p className="text-gray-400 text-sm text-center">
+              © 2021 Aalia. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
   );
 };
-
-export default Footer;

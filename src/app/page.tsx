@@ -4,7 +4,7 @@ import { ContentService } from '@/services/contentService';
 import React, { useEffect, useState } from 'react';
 
 // Import shared components
-import Footer from '@/components/shared/Footer';
+import { Footer } from '@/components/shared/Footer';
 import Header from '@/components/shared/Header';
 
 // Import home page specific components

@@ -1,70 +1,63 @@
-"use client";
-import React from 'react';
 
-// Mock data types
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  image: string;
-}
+const LatestBlogPostsSection = () => {
+  const blogPosts = [
+    {
+      id: 1,
+      title: "Tellus massa tempor dignissim",
+      date: "OCTOBER 21, 2021",
+      comments: "NO COMMENTS"
+    },
+    {
+      id: 2,
+      title: "Tellus massa tempor dignissim",
+      date: "OCTOBER 21, 2021",
+      comments: "NO COMMENTS"
+    },
+    {
+      id: 3,
+      title: "Tellus massa tempor dignissim",
+      date: "OCTOBER 21, 2021",
+      comments: "NO COMMENTS"
+    }
+  ];
 
-// Mock data
-const mockBlogPosts: BlogPost[] = [
-  {
-    id: '1',
-    title: 'Top 10 Luxury Destinations for 2024',
-    excerpt: 'Discover the most exclusive and breathtaking destinations for your next luxury vacation.',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
-  },
-  {
-    id: '2',
-    title: 'Villa Rental Tips: What to Look For',
-    excerpt: 'Essential tips and guidelines for choosing the perfect luxury villa for your vacation.',
-    image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80'
-  },
-  {
-    id: '3',
-    title: 'Sustainable Luxury Travel',
-    excerpt: 'How to enjoy luxury travel while being mindful of environmental impact.',
-    image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80'
-  }
-];
-
-const LatestBlog: React.FC = () => {
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+    <div className="bg-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
+        {/* Header Section - Centered */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-gray-900 mb-6 font-normal">
             Latest Blog Posts
-          </h2>
-          <p className="text-gray-600">
-            Stay updated with travel tips and destination guides
+          </h1>
+          <p className="text-gray-500 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+            Diam et habitasse tortor cras donec urna eget dolor in turpis venenatis<br className="hidden sm:block" />
+            <span className="sm:hidden"> </span>eget pulvinar ipsum quisque non arcu nulla
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {mockBlogPosts.map((post) => (
-            <article key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <img 
-                src={post.image} 
-                alt={post.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-3">{post.title}</h3>
-                <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                <a href="#" className="text-yellow-500 hover:text-yellow-600 font-semibold">
-                  Read More →
-                </a>
+
+        {/* Blog Posts Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          {blogPosts.map((post) => (
+            <div key={post.id} className="group cursor-pointer">
+              {/* Blog Post Image */}
+              <div className="w-full h-64 sm:h-72 lg:h-80 bg-gray-400 mb-6 group-hover:opacity-90 transition-opacity"></div>
+              
+              {/* Blog Post Content */}
+              <div className="space-y-3">
+                <h3 className="text-xl sm:text-2xl font-serif text-gray-900 font-normal group-hover:text-gray-700 transition-colors">
+                  {post.title}
+                </h3>
+                
+                <div className="text-gray-400 text-xs sm:text-sm font-medium tracking-wider">
+                  {post.date} {post.comments}
+                </div>
               </div>
-            </article>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default LatestBlog;
+export default LatestBlogPostsSection;
