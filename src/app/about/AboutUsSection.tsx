@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image';
 import React from "react";
 // import border2 from "./border-2.svg";
 // import border from "./border.svg";
@@ -44,18 +45,24 @@ export const AboutUsSection = () => {
               Our Partners
             </h3>
 
-            <img
+            <Image
               className="relative self-stretch w-full flex-[0_0_auto]"
               alt="Partner logos row"
               // src={row}
-              src={''}
+              src={'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=80&fit=crop&q=80'}
+              width={600}
+              height={80}
+              quality={80}
             />
 
-            <img
+            <Image
               className="relative self-stretch w-full flex-[0_0_auto]"
               alt="Partner logos image"
               // src={image}
-              src={''}
+              src={'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=80&fit=crop&q=80'}
+              width={600}
+              height={80}
+              quality={80}
             />
           </div>
 
@@ -84,11 +91,14 @@ export const AboutUsSection = () => {
 
           <div className="absolute w-[1325px] h-[439px] top-[863px] left-[275px]">
             <div className="absolute w-[605px] h-[439px] top-0 left-[720px] bg-gray-4">
-              <img
+              <Image
                 className="absolute w-[108px] h-[108px] top-[169px] left-[249px]"
                 alt="Decorative vector"
                 // src={vector}
-                src={''}
+                src={'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=108&h=108&fit=crop&q=80'}
+                width={108}
+                height={108}
+                quality={80}
               />
             </div>
 
@@ -118,11 +128,14 @@ export const AboutUsSection = () => {
                     </div>
 
                     {index < statisticsData.length - 1 && (
-                      <img
+                      <Image
                         className="relative flex-1 self-stretch grow object-cover"
                         alt="Divider border"
                         // src={index === 0 ? border : border2}
-                        src={''}
+                        src={`https://images.unsplash.com/photo-1618004912476-29818d81ae2e?w=100&h=50&fit=crop&q=80`}
+                        width={100}
+                        height={50}
+                        quality={80}
                       />
                     )}
                   </React.Fragment>

@@ -1,4 +1,5 @@
 import { ArrowRight, MapPin } from 'lucide-react';
+import Image from 'next/image';
 
 const StayInComfortSection = () => {
   const properties = [
@@ -50,11 +51,16 @@ const StayInComfortSection = () => {
             <div key={property.id} className="bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
               {/* Property Image */}
               <div className="w-full h-48 sm:h-56 md:h-64 lg:h-80 overflow-hidden">
-                <img 
+                <Image 
                   src={property.image} 
                   alt={property.name}
+                  width={800}
+                  height={320}
+                  quality={80}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
+                  priority={false}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bsFlT/aen1GqO2wSsAAAAQAB/cKVNYhHyyoAAa8AAP/Z"
                 />
               </div>
               

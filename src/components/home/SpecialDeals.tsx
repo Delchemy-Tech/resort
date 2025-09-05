@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 const SpecialDealsSection = () => {
   const deals = [
@@ -53,19 +54,16 @@ const SpecialDealsSection = () => {
             <div key={deal.id} className="group relative">
               {/* Deal Image */}
               <div className="w-full h-48 sm:h-56 lg:h-76 mb-4 overflow-hidden">
-                <img 
+                <Image 
                   src={deal.image} 
                   alt={deal.alt}
+                  width={800}
+                  height={224}
+                  quality={80}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  onError={(e) => {
-                    // Fallback to gray placeholder if image fails to load
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent) {
-                      parent.className = 'w-full h-48 sm:h-56 lg:h-76 bg-gray-400 mb-4';
-                    }
-                  }}
+                  priority={false}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bsFlT/aen1GqO2wSsAAAAQAB/cKVNYhHyyoAAa8AAP/Z"
                 />
               </div>
               

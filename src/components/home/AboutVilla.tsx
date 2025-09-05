@@ -1,6 +1,7 @@
 "use client";
 import { Section } from '@/lib/supabase';
 import { Play } from 'lucide-react';
+import Image from 'next/image';
 import React from 'react';
 
 interface AboutVillaProps {
@@ -50,10 +51,16 @@ const AboutVilla: React.FC<AboutVillaProps> = ({ aboutData }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-20">
           {/* Left side - Image */}
           <div className="order-2 lg:order-1">
-            <img 
+            <Image 
               src={data.section_1?.image || defaultData.section_1.image}
               alt="Luxury Villa" 
+              width={800}
+              height={500}
+              quality={80}
               className="w-full h-[500px] object-cover rounded-lg"
+              priority={true}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bsFlT/aen1GqO2wSsAAAAQAB/cKVNYhHyyoAAa8AAP/Z"
             />
           </div>
           
@@ -124,10 +131,16 @@ const AboutVilla: React.FC<AboutVillaProps> = ({ aboutData }) => {
                   </div>
                 </div>
               ) : (
-                <img 
+                <Image 
                   src={data.section_2?.image || defaultData.section_2.image}
                   alt="Villa Access" 
+                  width={800}
+                  height={400}
+                  quality={80}
                   className="w-full h-full object-cover"
+                  priority={false}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bsFlT/aen1GqO2wSsAAAAQAB/cKVNYhHyyoAAa8AAP/Z"
                 />
               )}
             </div>

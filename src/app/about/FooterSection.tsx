@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import { useState } from "react";
 import border3 from "./border-3.svg";
 import villague2 from "./villague-2.svg";
@@ -79,10 +80,13 @@ export const FooterSection = () => {
 
       <div className="absolute w-[1049px] h-[135px] top-[375px] left-[276px]">
         <div className="flex flex-col w-[420px] items-start gap-8 absolute top-0 left-0">
-          <img
+          <Image
             className="relative w-[127.8px] h-[31.07px]"
             alt="Villague"
             src={villague2}
+            width={128}
+            height={31}
+            quality={80}
           />
 
           <p className="relative self-stretch font-body-text-normal font-[number:var(--body-text-normal-font-weight)] text-white text-[length:var(--body-text-normal-font-size)] tracking-[var(--body-text-normal-letter-spacing)] leading-[var(--body-text-normal-line-height)] [font-style:var(--body-text-normal-font-style)]">
@@ -234,10 +238,13 @@ export const FooterSection = () => {
       </div>
 
       <div className="absolute w-[1052px] h-14 top-[770px] left-[275px]">
-        <img
+        <Image
           className="absolute w-[1050px] h-px -top-px left-0 object-cover"
           alt="Border"
           src={border3}
+          width={1050}
+          height={1}
+          quality={80}
         />
 
         <p className="absolute top-8 left-96 font-body-text-normal font-[number:var(--body-text-normal-font-weight)] text-white text-[length:var(--body-text-normal-font-size)] tracking-[var(--body-text-normal-letter-spacing)] leading-[var(--body-text-normal-line-height)] whitespace-nowrap [font-style:var(--body-text-normal-font-style)]">

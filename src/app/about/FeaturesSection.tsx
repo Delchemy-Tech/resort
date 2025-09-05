@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image';
 import line1 from "./line-1.svg";
 import villague from "./villague.svg";
 
@@ -20,10 +21,13 @@ export const FeaturesSection = () => {
           role="banner"
         >
           <div className="flex w-[1049px] items-center justify-between px-0 py-4 absolute top-0 left-[276px]">
-            <img
+            <Image
               className="relative w-[127.8px] h-[31.07px]"
               alt="Villague"
               src={villague}
+              width={128}
+              height={31}
+              quality={80}
             />
 
             <nav
@@ -51,10 +55,13 @@ export const FeaturesSection = () => {
             </div>
           </div>
 
-          <img
+          <Image
             className="absolute w-[1600px] h-px top-20 left-0 object-cover"
             alt="Line"
             src={line1}
+            width={1600}
+            height={1}
+            quality={80}
           />
         </header>
 

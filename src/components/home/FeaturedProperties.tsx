@@ -1,5 +1,6 @@
 "use client";
-import React from 'react';
+import Image from 'next/image';
+import React, { useState } from 'react';
 
 // Gallery images
 const galleryImages = [
@@ -68,6 +69,18 @@ const galleryImages = [
 const FeaturedProperties: React.FC = () => {
   // Function to get images based on screen size
   const getImagesForBreakpoint = (count: number) => galleryImages.slice(0, count);
+  
+  // State to track failed images
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+  
+  // Handle image errors
+  const handleImageError = (imageId: string) => {
+    console.log(`Image failed to load: ${imageId}`);
+    setFailedImages((prev: Set<string>) => new Set([...prev, imageId]));
+  };
+  
+  // Fallback image URL
+  const fallbackImage = 'https://via.placeholder.com/800x600/e5e7eb/9ca3af?text=Resort+Image';
 
   return (
     <section className="bg-white">
@@ -87,10 +100,17 @@ const FeaturedProperties: React.FC = () => {
         <div className="sm:hidden grid grid-cols-2 gap-0">
           {getImagesForBreakpoint(4).map((image) => (
             <div key={image.id} className="relative group overflow-hidden">
-              <img 
-                src={image.src} 
+              <Image 
+                src={failedImages.has(image.id) ? fallbackImage : image.src} 
                 alt={image.alt}
+                width={400}
+                height={128}
+                quality={80}
                 className="w-full h-32 object-cover transition-transform duration-300 group-hover:scale-105"
+                onError={() => handleImageError(image.id)}
+                priority={false}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bsFlT/aen1GqO2wSsAAAAQAB/cKVNYhHyyoAAa8AAP/Z"
               />
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
@@ -101,10 +121,17 @@ const FeaturedProperties: React.FC = () => {
         <div className="hidden sm:grid md:hidden grid-cols-3 gap-0">
           {getImagesForBreakpoint(6).map((image) => (
             <div key={image.id} className="relative group overflow-hidden">
-              <img 
-                src={image.src} 
+              <Image 
+                src={failedImages.has(image.id) ? fallbackImage : image.src} 
                 alt={image.alt}
+                width={400}
+                height={160}
+                quality={80}
                 className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105"
+                onError={() => handleImageError(image.id)}
+                priority={false}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bsFlT/aen1GqO2wSsAAAAQAB/cKVNYhHyyoAAa8AAP/Z"
               />
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
@@ -115,10 +142,17 @@ const FeaturedProperties: React.FC = () => {
         <div className="hidden md:grid lg:hidden grid-cols-4 gap-0">
           {getImagesForBreakpoint(8).map((image) => (
             <div key={image.id} className="relative group overflow-hidden">
-              <img 
-                src={image.src} 
+              <Image 
+                src={failedImages.has(image.id) ? fallbackImage : image.src} 
                 alt={image.alt}
+                width={400}
+                height={192}
+                quality={80}
                 className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                onError={() => handleImageError(image.id)}
+                priority={false}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bsFlT/aen1GqO2wSsAAAAQAB/cKVNYhHyyoAAa8AAP/Z"
               />
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
@@ -129,10 +163,17 @@ const FeaturedProperties: React.FC = () => {
         <div className="hidden lg:grid grid-cols-6 gap-0">
           {getImagesForBreakpoint(12).map((image) => (
             <div key={image.id} className="relative group overflow-hidden">
-              <img 
-                src={image.src} 
+              <Image 
+                src={failedImages.has(image.id) ? fallbackImage : image.src} 
                 alt={image.alt}
+                width={400}
+                height={224}
+                quality={80}
                 className="w-full h-56 xl:h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                onError={() => handleImageError(image.id)}
+                priority={false}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bsFlT/aen1GqO2wSsAAAAQAB/cKVNYhHyyoAAa8AAP/Z"
               />
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import image2 from "./image-2.svg";
 import image3 from "./image-3.svg";
 
@@ -77,10 +78,13 @@ export const TestimonialsSection = () => {
               className="w-[510px] items-start gap-6 p-8 bg-white shadow-shadow flex flex-col relative"
               role="listitem"
             >
-              <img
+              <Image
                 className="relative w-[36.57px] h-[26.69px]"
                 alt="Quote icon"
                 src={testimonial.image}
+                width={37}
+                height={27}
+                quality={80}
               />
 
               <div
