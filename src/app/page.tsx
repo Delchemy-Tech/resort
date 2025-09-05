@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 export const runtime = "edge";
 
 // Import shared components
-import { Footer } from '@/components/shared/Footer';
+import Footer from '@/components/shared/Footer';
 import Header from '@/components/shared/Header';
 
 // Import home page specific components

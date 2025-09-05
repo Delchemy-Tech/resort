@@ -2,7 +2,7 @@ import { Facebook, Instagram, MessageCircle, Twitter, Youtube } from "lucide-rea
 import React from "react";
 import { Button } from "../home/ui/button";
 
-export const Footer: React.FC = () => {
+const Footer: React.FC = () => {
   return (
     <footer className="text-white" style={{ backgroundColor: '#222222' }}>
       {/* Main Footer Content */}
@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div className="max-w-lg">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-normal text-gray-900 mb-4">
-                Speak to us about your travel plans, we're here to help.
+                Speak to us about your travel plans, we&apos;re here to help.
               </h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 Diam et habitasse tortor cras donec urna eget dolor in turpis venenatis eget pulvinar ipsum quisque non arcu nulla
@@ -198,3 +198,5 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+
+export default Footer;
