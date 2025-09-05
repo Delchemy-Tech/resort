@@ -1,7 +1,11 @@
 "use client";
+
 import { Section } from '@/lib/supabase';
 import { ContentService } from '@/services/contentService';
 import React, { useEffect, useState } from 'react';
+
+// Configure runtime for Cloudflare Pages Edge Runtime
+export const runtime = "edge";
 
 // Import shared components
 import { Footer } from '@/components/shared/Footer';

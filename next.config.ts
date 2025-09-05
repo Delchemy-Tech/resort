@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 
+// Note: setupDevPlatform is handled in a separate module to avoid runtime issues
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
