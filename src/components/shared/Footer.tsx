@@ -7,7 +7,8 @@ export const Footer: React.FC = () => {
     <footer className="text-white" style={{ backgroundColor: '#222222' }}>
       {/* Main Footer Content */}
       <div className="py-16">
-        {/* CTA Section */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* CTA Section */}
         <div className="max-w-5xl mx-auto text-gray-900 py-8 mb-16 rounded-lg" style={{ backgroundColor: 'rgba(217, 226, 205, 0.8)' }}>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div className="max-w-lg">
@@ -19,13 +20,12 @@ export const Footer: React.FC = () => {
               </p>
             </div>
             
-            <Button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium uppercase tracking-wide hover:bg-gray-800 whitespace-nowrap">
+            <Button className="inline-flex items-center justify-center gap-2 px-8 py-6 bg-gray-900 text-white text-sm font-bold uppercase tracking-wide hover:bg-gray-800 whitespace-nowrap rounded-none">
               CHAT WITH US
               <MessageCircle className="w-4 h-4" />
             </Button>
           </div>
         </div>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Brand and Newsletter Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
             {/* Brand Section */}
@@ -47,13 +47,13 @@ export const Footer: React.FC = () => {
                 Diam et habitasse tortor cras donec urna eget dolor in turpis venenatis eget.
               </p>
               
-              <div className="flex gap-0 max-w-md">
+              <div className="flex gap-2 max-w-md h-12">
                 <input
                   type="email"
                   placeholder="Enter your email address"
-                  className="flex-1 px-4 py-3 bg-white text-gray-900 border-0 focus:outline-none text-sm placeholder-gray-500"
+                  className="flex-1 px-4 bg-white text-gray-900 border-0 focus:outline-none text-sm placeholder-gray-500 h-full"
                 />
-                <Button className="px-6 py-3 bg-yellow-400 text-gray-900 text-sm font-medium uppercase tracking-wide hover:bg-yellow-500 border-0">
+                <Button className="px-6 bg-yellow-400 text-gray-900 text-sm font-bold uppercase tracking-wide hover:bg-yellow-500 border-0 h-full rounded-none">
                   SUBSCRIBES
                 </Button>
               </div>
@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
           {/* Footer Links Grid */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 mb-16">
             {/* Office */}
-            <div>
+            <div className="col-span-2 md:col-span-1">
               <h4 className="text-lg font-serif font-normal text-white mb-6">
                 Office
               </h4>
