@@ -5,27 +5,26 @@ import { Button } from "../home/ui/button";
 export const Footer: React.FC = () => {
   return (
     <footer className="text-white" style={{ backgroundColor: '#222222' }}>
-      {/* CTA Section */}
-      <div className="bg-gray-100 text-gray-900 py-8">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <div className="max-w-lg">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-normal text-gray-900 mb-4">
-              Speak to us about your travel plans, we're here to help.
-            </h2>
-            <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-              Diam et habitasse tortor cras donec urna eget dolor in turpis venenatis eget pulvinar ipsum quisque non arcu nulla
-            </p>
-          </div>
-          
-          <Button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium uppercase tracking-wide hover:bg-gray-800 whitespace-nowrap">
-            CHAT WITH US
-            <MessageCircle className="w-4 h-4" />
-          </Button>
-        </div>
-      </div>
-
       {/* Main Footer Content */}
       <div className="py-16">
+        {/* CTA Section */}
+        <div className="max-w-5xl mx-auto text-gray-900 py-8 mb-16 rounded-lg" style={{ backgroundColor: 'rgba(217, 226, 205, 0.8)' }}>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div className="max-w-lg">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-normal text-gray-900 mb-4">
+                Speak to us about your travel plans, we're here to help.
+              </h2>
+              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                Diam et habitasse tortor cras donec urna eget dolor in turpis venenatis eget pulvinar ipsum quisque non arcu nulla
+              </p>
+            </div>
+            
+            <Button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium uppercase tracking-wide hover:bg-gray-800 whitespace-nowrap">
+              CHAT WITH US
+              <MessageCircle className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Brand and Newsletter Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
@@ -152,34 +151,34 @@ export const Footer: React.FC = () => {
 
             {/* Follow Us */}
             <div>
-              <h4 className="text-lg font-serif font-normal text-white mb-6">
+              <h4 className="text-lg font-serif font-normal text-white mb-6 text-left lg:text-center">
                 Follow Us
               </h4>
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-wrap min-w-0 justify-start lg:justify-center">
                 <a
                   href="#"
-                  className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                  className="w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
                   style={{ backgroundColor: '#ACB889' }}
                 >
                   <Facebook className="w-5 h-5 text-gray-900" />
                 </a>
                 <a
                   href="#"
-                  className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                  className="w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
                   style={{ backgroundColor: '#ACB889' }}
                 >
                   <Twitter className="w-5 h-5 text-gray-900" />
                 </a>
                 <a
                   href="#"
-                  className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                  className="w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
                   style={{ backgroundColor: '#ACB889' }}
                 >
                   <Instagram className="w-5 h-5 text-gray-900" />
                 </a>
                 <a
                   href="#"
-                  className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+                  className="w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
                   style={{ backgroundColor: '#ACB889' }}
                 >
                   <Youtube className="w-5 h-5 text-gray-900" />

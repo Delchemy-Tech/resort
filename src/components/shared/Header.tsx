@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ headerData }) => {
   return (
     <>
       {/* Mobile Header */}
-      <header className="lg:hidden bg-yellow-400 sticky top-0 left-0 right-0 z-50">
+      <header className="lg:hidden bg-yellow-400 sticky top-0 left-0 right-0 z-50 shadow-lg">
         <div className="grid grid-cols-3 h-14">
           {/* Menu Section */}
           <button 
@@ -88,12 +88,12 @@ const Header: React.FC<HeaderProps> = ({ headerData }) => {
       )}
 
       {/* Desktop Header */}
-      <header className="hidden lg:block bg-white/10 backdrop-blur-sm sticky top-0 left-0 right-0 z-50 border-b border-white/20">
+      <header className="hidden lg:block bg-black/80 backdrop-blur-md sticky top-0 left-0 right-0 z-50 border-b border-white/20 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Brand Name */}
             <div className="flex items-center min-w-0 flex-1">
-              <h1 className="text-xl md:text-2xl font-bold text-white truncate">
+              <h1 className="text-xl md:text-2xl font-bold text-white drop-shadow-sm truncate">
                 {data.brand_name || defaultData.brand_name}
               </h1>
             </div>
@@ -104,7 +104,7 @@ const Header: React.FC<HeaderProps> = ({ headerData }) => {
                 <a 
                   key={index}
                   href={item.href || '#'} 
-                  className="text-white/90 hover:text-yellow-400 transition-colors font-medium text-sm uppercase tracking-wide whitespace-nowrap"
+                  className="text-white drop-shadow-sm hover:text-yellow-400 transition-colors font-medium text-sm uppercase tracking-wide whitespace-nowrap"
                 >
                   {item.name}
                 </a>
