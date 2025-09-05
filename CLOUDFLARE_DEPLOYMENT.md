@@ -8,7 +8,7 @@ This project is configured for deployment on Cloudflare Pages with Next.js SSR s
 - `@cloudflare/next-on-pages` package installed
 - `wrangler.toml` configuration file 
 - `next.config.ts` with Cloudflare setup
-- Package.json scripts for Cloudflare deployment
+- Package.json scripts for Cloudflare deployment 
 - Environment variables setup
 
 ## Prerequisites
