@@ -6,19 +6,22 @@ const StayInComfortSection = () => {
       id: 1,
       name: "The Secret Jungle Villa",
       location: "BALI, INDONESIA",
-      price: "$290,00"
+      price: "$290,00",
+      image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80&fit=crop&crop=center"
     },
     {
       id: 2,
-      name: "The Secret Jungle Villa",
-      location: "BALI, INDONESIA", 
-      price: "$290,00"
+      name: "Luxury Beach Resort",
+      location: "MALDIVES", 
+      price: "$450,00",
+      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop&crop=center"
     },
     {
       id: 3,
-      name: "The Secret Jungle Villa",
-      location: "BALI, INDONESIA",
-      price: "$290,00"
+      name: "Mountain View Retreat",
+      location: "SWISS ALPS",
+      price: "$380,00",
+      image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop&crop=center"
     }
   ];
 
@@ -44,9 +47,16 @@ const StayInComfortSection = () => {
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {properties.map((property) => (
-            <div key={property.id} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-              {/* Large Gray Rectangle Image Placeholder */}
-              <div className="w-full h-48 sm:h-56 md:h-64 lg:h-80 bg-gray-400"></div>
+            <div key={property.id} className="bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+              {/* Property Image */}
+              <div className="w-full h-48 sm:h-56 md:h-64 lg:h-80 overflow-hidden">
+                <img 
+                  src={property.image} 
+                  alt={property.name}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
               
               {/* Property Info */}
               <div className="p-4 md:p-6">
