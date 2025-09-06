@@ -1,6 +1,6 @@
 "use client";
 import { Section } from '@/lib/supabase';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface HeaderProps {
   headerData: Section | null;
@@ -8,6 +8,17 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ headerData }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Default values if no data from database
   const defaultData = {
@@ -88,12 +99,18 @@ const Header: React.FC<HeaderProps> = ({ headerData }) => {
       )}
 
       {/* Desktop Header */}
-      <header className="hidden lg:block bg-black/80 backdrop-blur-md sticky top-0 left-0 right-0 z-50 border-b border-white/20 shadow-lg">
+      <header className={`hidden lg:block fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white border-b border-gray-200 shadow-lg' 
+          : 'bg-transparent border-b border-white/20'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Brand Name */}
             <div className="flex items-center min-w-0 flex-1">
-              <h1 className="text-xl md:text-2xl font-bold text-white drop-shadow-sm truncate">
+              <h1 className={`text-xl md:text-2xl font-bold truncate transition-colors duration-300 ${
+                isScrolled ? 'text-gray-900' : 'text-white drop-shadow-sm'
+              }`}>
                 {data.brand_name || defaultData.brand_name}
               </h1>
             </div>
@@ -104,7 +121,11 @@ const Header: React.FC<HeaderProps> = ({ headerData }) => {
                 <a 
                   key={index}
                   href={item.href || '#'} 
-                  className="text-white drop-shadow-sm hover:text-yellow-400 transition-colors font-medium text-sm uppercase tracking-wide whitespace-nowrap"
+                  className={`font-medium text-sm uppercase tracking-wide whitespace-nowrap transition-colors duration-300 ${
+                    isScrolled 
+                      ? 'text-gray-700 hover:text-yellow-600' 
+                      : 'text-white drop-shadow-sm hover:text-yellow-400'
+                  }`}
                 >
                   {item.name}
                 </a>

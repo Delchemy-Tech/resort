@@ -24,8 +24,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroData }) => {
   };
 
   // Use database data if available, otherwise use defaults
-  // const data = heroData?.section_json || defaultData;
-  const data =defaultData; 
+  const data = heroData?.section_json || defaultData;
+  // const data =defaultData; 
   return (
     <section className="relative h-[100vh] bg-cover bg-center" style={{
       backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("${data.image_1 || defaultData.image_1}")`
