@@ -30,7 +30,7 @@ For the Hero section (`section_name = "Hero"`), the `section_json` field should 
   "top_title": "Welcome to",
   "title": "Paradise Resort", 
   "sub_title": "Experience luxury and tranquility in our exclusive villas",
-  "image_1": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80",
+  "image_1": "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
   "search_form": {
     "location_placeholder": "Location",
     "checkin_placeholder": "Check in",

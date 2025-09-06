@@ -13,7 +13,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroData }) => {
     top_title: 'ENJOY THE FINEST STAYS',
     title: 'Find Your Best Villa House And Appartment',
     sub_title: 'Gravida vulputate aliquet tempor sitoque sed pretium non urna sed etid aenean haretra quam placerat adipiscing',
-    image_1: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
+    image_1: 'https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg',
     search_form: {
       room_placeholder: 'Select one of our Room',
       checkout_placeholder: 'Check out',
@@ -24,8 +24,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroData }) => {
   };
 
   // Use database data if available, otherwise use defaults
-  const data = heroData?.section_json || defaultData;
-  
+  // const data = heroData?.section_json || defaultData;
+  const data =defaultData; 
   return (
     <section className="relative h-[100vh] bg-cover bg-center" style={{
       backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("${data.image_1 || defaultData.image_1}")`
