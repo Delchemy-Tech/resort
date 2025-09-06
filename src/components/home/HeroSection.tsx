@@ -1,4 +1,3 @@
-"use client";
 import { Section } from '@/lib/supabase';
 import { Calendar, ChevronDown, Users } from 'lucide-react';
 import React from 'react';
