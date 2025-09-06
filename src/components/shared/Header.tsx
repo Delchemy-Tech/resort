@@ -1,5 +1,6 @@
 "use client";
 import { Section } from '@/lib/supabase';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 interface HeaderProps {
@@ -24,10 +25,10 @@ const Header: React.FC<HeaderProps> = ({ headerData }) => {
   const defaultData = {
     brand_name: 'VillaRent',
     navigation: [
-      { name: 'Home', href: '#' },
-      { name: 'Properties', href: '#' },
-      { name: 'About', href: '#' },
-      { name: 'Contact', href: '#' }
+      { name: 'Home', href: '/' },
+      { name: 'Properties', href: '/properties' },
+      { name: 'About', href: '/about' },
+      { name: 'Contact', href: '/contact' }
     ],
     cta_button: 'Sign In'
   };
@@ -84,14 +85,14 @@ const Header: React.FC<HeaderProps> = ({ headerData }) => {
             </div>
             <nav className="p-4">
               {(data.navigation || defaultData.navigation).map((item: any, index: number) => (
-                <a 
+                <Link 
                   key={index}
                   href={item.href || '#'} 
                   className="block py-3 text-gray-700 hover:text-yellow-600 transition-colors font-medium border-b border-gray-100 last:border-b-0"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
@@ -118,7 +119,7 @@ const Header: React.FC<HeaderProps> = ({ headerData }) => {
             {/* Navigation Menu */}
             <nav className="flex items-center justify-center flex-1 space-x-8">
               {(data.navigation || defaultData.navigation).map((item: any, index: number) => (
-                <a 
+                <Link 
                   key={index}
                   href={item.href || '#'} 
                   className={`font-medium text-sm uppercase tracking-wide whitespace-nowrap transition-colors duration-300 ${
@@ -128,7 +129,7 @@ const Header: React.FC<HeaderProps> = ({ headerData }) => {
                   }`}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </nav>
             
