@@ -1,33 +1,55 @@
+"use client";
+import { useActiveDeals, useAppDispatch } from '@/hooks/redux';
+import { fetchSpecialDeals } from '@/store/slices/specialDealsSlice';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 const SpecialDealsSection = () => {
-  const deals = [
-    { 
-      id: 1, 
-      title: "Extra 5% off",
-      image: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "Luxury Beach Resort Deal"
-    },
-    { 
-      id: 2, 
-      title: "Extra 5% off",
-      image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "Mountain Villa Deal"
-    },
-    { 
-      id: 3, 
-      title: "Extra 5% off",
-      image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "Desert Retreat Deal"
-    },
-    { 
-      id: 4, 
-      title: "Extra 5% off",
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "Coastal Villa Deal"
+  const dispatch = useAppDispatch();
+  const activeDeals = useActiveDeals();
+  
+  useEffect(() => {
+    // Fetch special deals if not already loaded
+    if (activeDeals.length === 0) {
+      dispatch(fetchSpecialDeals());
     }
-  ];
+  }, [dispatch, activeDeals.length]);
+  
+  // Use Redux data or fallback to mock data
+  const deals = activeDeals.length > 0 
+    ? activeDeals.slice(0, 4).map((deal: any) => ({
+        id: deal.id,
+        title: deal.title,
+        image: deal.image || "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        alt: deal.title + " Deal"
+      }))
+    : [
+      { 
+        id: '1', 
+        title: "Extra 5% off",
+        image: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        alt: "Luxury Beach Resort Deal"
+      },
+      { 
+        id: '2', 
+        title: "Extra 5% off",
+        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        alt: "Mountain Villa Deal"
+      },
+      { 
+        id: '3', 
+        title: "Extra 5% off",
+        image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        alt: "Desert Retreat Deal"
+      },
+      { 
+        id: '4', 
+        title: "Extra 5% off",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        alt: "Coastal Villa Deal"
+      }
+    ];
 
   return (
     <div className="bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
@@ -50,7 +72,7 @@ const SpecialDealsSection = () => {
 
         {/* Deals Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {deals.map((deal) => (
+          {deals.map((deal: any) => (
             <div key={deal.id} className="group relative">
               {/* Deal Image */}
               <div className="w-full h-48 sm:h-56 lg:h-76 mb-4 overflow-hidden">

@@ -1,11 +1,26 @@
 "use client";
 
-import { Section } from '@/lib/supabase';
-import { ContentService } from '@/services/contentService';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 // Configure runtime for Cloudflare Pages Edge Runtime
 export const runtime = "edge";
+
+// Import Redux hooks and actions
+import { useAppDispatch, useContent, useContentSection, useErrorState, useLoadingState } from '@/hooks/redux';
+import { fetchAmenities } from '@/store/slices/amenitiesSlice';
+import { fetchLatestBlogPosts } from '@/store/slices/blogSlice';
+import {
+  fetchAllSections,
+  fetchHealthStatus,
+  fetchSection,
+  testDatabaseConnection,
+} from '@/store/slices/contentSlice';
+import { fetchFacilities } from '@/store/slices/facilitiesSlice';
+import { fetchFeaturedProperties } from '@/store/slices/propertiesSlice';
+import { fetchServices } from '@/store/slices/servicesSlice';
+import { fetchSpecialDeals } from '@/store/slices/specialDealsSlice';
+import { fetchTestimonials } from '@/store/slices/testimonialsSlice';
+import { addNotification, setGlobalLoading } from '@/store/slices/uiSlice';
 
 // Import shared components
 import Footer from '@/components/shared/Footer';
@@ -24,116 +39,122 @@ import Testimonials from '@/components/home/Testimonials';
 
 // Main Home Page Component
 const HomePage: React.FC = () => {
-  const [headerData, setHeaderData] = useState<Section | null>(null);
-  const [heroData, setHeroData] = useState<Section | null>(null);
-  const [aboutData, setAboutData] = useState<Section | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [healthStatus, setHealthStatus] = useState<any>(null);
-
+  const dispatch = useAppDispatch();
+  
+  // Redux state selectors
+  const content = useContent();
+  const loadingState = useLoadingState();
+  const errorState = useErrorState();
+  
+  // Get specific sections
+  const headerData = useContentSection('Header');
+  const heroData = useContentSection('Hero');
+  const aboutData = useContentSection('About');
+  
   useEffect(() => {
-    const fetchSectionData = async () => {
+    const initializeApp = async () => {
       try {
+        dispatch(setGlobalLoading(true));
+        
         const resortId = parseInt(process.env.NEXT_PUBLIC_RESORT_ID || '1');
         console.log('🏨 Resort ID from env:', resortId);
         
-        // Comprehensive health check first
+        // Health check first
         console.log('🌡️ Starting comprehensive health check...');
-        const healthCheck = await ContentService.healthCheck();
-        setHealthStatus(healthCheck.data);
+        const healthResult = await dispatch(fetchHealthStatus()).unwrap();
         
-        if (!healthCheck.success) {
-          console.warn('⚠️ Health check failed, but continuing with fallback mode');
-          setError('Database connectivity issues detected. Using fallback mode.');
+        if (!healthResult) {
+          dispatch(addNotification({
+            type: 'warning',
+            title: 'Database Warning',
+            message: 'Database connectivity issues detected. Using fallback mode.',
+            autoClose: true,
+            duration: 5000,
+          }));
         }
         
-        // Test database connection with enhanced error handling
+        // Test database connection
         console.log('🔗 Testing database connection...');
-        const connectionTest = await ContentService.testConnection();
-        if (!connectionTest.success) {
+        try {
+          await dispatch(testDatabaseConnection()).unwrap();
+          console.log('✅ Database connection successful');
+        } catch (connectionError) {
           console.warn('❌ Database connection failed, using default values');
-          setError(connectionTest.error?.message || 'Database connection failed');
-          
-          // Still show diagnostic information
-          await ContentService.showAllTables();
-          await ContentService.checkAccessibleTables();
-          setLoading(false);
-          return;
+          dispatch(addNotification({
+            type: 'error',
+            title: 'Connection Failed',
+            message: 'Database connection failed. Using default content.',
+            autoClose: true,
+            duration: 5000,
+          }));
         }
         
-        // Show diagnostic information
-        const tableResult = await ContentService.showAllTables();
-        const accessResult = await ContentService.checkAccessibleTables();
-        
-        // Run specific diagnosis for problematic tables
-        if (!accessResult.success && accessResult.data === null) {
-          console.log('🔍 Running specific diagnosis for problematic tables...');
-          await ContentService.diagnoseTableIssue('users');
-          await ContentService.diagnoseTableIssue('sections');
+        // Fetch all sections
+        console.log('📊 Fetching all sections...');
+        try {
+          await dispatch(fetchAllSections({ resortId })).unwrap();
+        } catch (sectionsError) {
+          console.warn('⚠️ Failed to fetch sections:', sectionsError);
         }
         
-        // Check if sample data exists
-        const sampleDataCheck = await ContentService.checkSampleData(resortId);
-        if (!sampleDataCheck.success) {
-          console.warn('⚠️ Sample data check failed:', sampleDataCheck.error?.message);
-        }
+        // Fetch specific sections
+        const sectionPromises = [
+          dispatch(fetchSection({ resortId, sectionName: 'Header' })),
+          dispatch(fetchSection({ resortId, sectionName: 'Hero' })),
+          dispatch(fetchSection({ resortId, sectionName: 'About' })),
+        ];
         
-        // Fetch header data with enhanced error handling
-        console.log('🗺️ Fetching header data...');
-        const headerResult = await ContentService.getSectionByName(resortId, 'Header');
-        if (headerResult.success && headerResult.data) {
-          setHeaderData(headerResult.data);
-          console.log('✅ Header data loaded successfully');
-        } else {
-          console.warn('⚠️ Header data not found:', headerResult.error?.message);
-        }
+        // Fetch all other data in parallel
+        const dataPromises = [
+          dispatch(fetchFeaturedProperties(3)),
+          dispatch(fetchServices()),
+          dispatch(fetchFacilities()),
+          dispatch(fetchAmenities()),
+          dispatch(fetchSpecialDeals()),
+          dispatch(fetchTestimonials()),
+          dispatch(fetchLatestBlogPosts(3)),
+        ];
         
-        // Fetch hero section data with enhanced error handling
-        console.log('🎆 Fetching hero data...');
-        const heroResult = await ContentService.getSectionByName(resortId, 'Hero');
-        if (heroResult.success && heroResult.data) {
-          setHeroData(heroResult.data);
-          console.log('✅ Hero data loaded successfully');
-        } else {
-          console.warn('⚠️ Hero data not found:', heroResult.error?.message);
-        }
+        // Wait for all data to load
+        await Promise.allSettled([...sectionPromises, ...dataPromises]);
         
-        // Fetch about section data with enhanced error handling
-        console.log('ℹ️ Fetching about data...');
-        const aboutResult = await ContentService.getSectionByName(resortId, 'About');
-        if (aboutResult.success && aboutResult.data) {
-          setAboutData(aboutResult.data);
-          console.log('✅ About data loaded successfully');
-        } else {
-          console.warn('⚠️ About data not found:', aboutResult.error?.message);
-        }
+        dispatch(addNotification({
+          type: 'success',
+          title: 'Data Loaded',
+          message: 'All resort data has been loaded successfully!',
+          autoClose: true,
+          duration: 3000,
+        }));
         
-        // Clear any previous errors if we get here
-        setError(null);
-        console.log('🎉 All section data fetching completed!');
+        console.log('🎉 All data fetching completed!');
         
       } catch (globalError) {
-        console.error('💥 Global error in fetchSectionData:', globalError);
-        setError('An unexpected error occurred while loading page data.');
+        console.error('💥 Global error in initializeApp:', globalError);
+        dispatch(addNotification({
+          type: 'error',
+          title: 'Loading Error',
+          message: 'An unexpected error occurred while loading page data.',
+          autoClose: false,
+        }));
       } finally {
-        setLoading(false);
+        dispatch(setGlobalLoading(false));
       }
     };
 
-    fetchSectionData();
-  }, []);
+    initializeApp();
+  }, [dispatch]);
 
-  if (loading) {
+  if (loadingState.global || loadingState.content) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-yellow-500 mx-auto mb-4"></div>
           <p className="text-lg text-gray-600">Loading resort data...</p>
-          {healthStatus && (
+          {content.healthStatus && (
             <div className="mt-4 text-sm text-gray-500">
-              <p>Database: {healthStatus.checks?.database ? '✅' : '❌'}</p>
-              <p>Tables: {healthStatus.checks?.tables ? '✅' : '❌'}</p>
-              <p>Environment: {healthStatus.checks?.environment ? '✅' : '❌'}</p>
+              <p>Database: {content.healthStatus.checks?.database ? '✅' : '❌'}</p>
+              <p>Tables: {content.healthStatus.checks?.tables ? '✅' : '❌'}</p>
+              <p>Environment: {content.healthStatus.checks?.environment ? '✅' : '❌'}</p>
             </div>
           )}
         </div>
@@ -142,13 +163,13 @@ const HomePage: React.FC = () => {
   }
 
   // Error state with helpful information
-  if (error) {
+  if (errorState.hasErrors) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-md mx-auto text-center p-6 bg-white rounded-lg shadow-lg">
           <div className="text-red-500 text-6xl mb-4">⚠️</div>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Database Connection Issue</h2>
-          <p className="text-gray-600 mb-6">{error}</p>
+          <p className="text-gray-600 mb-6">{errorState.content || 'An error occurred'}</p>
           <div className="text-sm text-gray-500 mb-4">
             <p>The website will continue to work with default content.</p>
             <p>Check the browser console for detailed error information.</p>

@@ -1,8 +1,17 @@
+"use client";
+import { useAppDispatch } from '@/hooks/redux';
+import { fetchServices } from '@/store/slices/servicesSlice';
 import { Facebook, Instagram, MessageCircle, Twitter, Youtube } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../home/ui/button";
 
 const Footer: React.FC = () => {
+  const dispatch = useAppDispatch();
+  
+  useEffect(() => {
+    // Fetch services for the Services section
+    dispatch(fetchServices());
+  }, [dispatch]);
   return (
     <footer className="text-white" style={{ backgroundColor: '#222222' }}>
       {/* Main Footer Content */}

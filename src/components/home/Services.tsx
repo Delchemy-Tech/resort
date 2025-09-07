@@ -1,30 +1,53 @@
+"use client";
+import { useAppDispatch, useFeaturedProperties } from '@/hooks/redux';
+import { fetchFeaturedProperties } from '@/store/slices/propertiesSlice';
 import { ArrowRight, MapPin } from 'lucide-react';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 const StayInComfortSection = () => {
-  const properties = [
-    {
-      id: 1,
-      name: "The Secret Jungle Villa",
-      location: "BALI, INDONESIA",
-      price: "$290,00",
-      image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80&fit=crop&crop=center"
-    },
-    {
-      id: 2,
-      name: "Luxury Beach Resort",
-      location: "MALDIVES", 
-      price: "$450,00",
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop&crop=center"
-    },
-    {
-      id: 3,
-      name: "Mountain View Retreat",
-      location: "SWISS ALPS",
-      price: "$380,00",
-      image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop&crop=center"
+  const dispatch = useAppDispatch();
+  const featuredProperties = useFeaturedProperties();
+  
+  useEffect(() => {
+    // Fetch featured properties if not already loaded
+    if (featuredProperties.length === 0) {
+      dispatch(fetchFeaturedProperties(3)); // Get 3 properties for this section
     }
-  ];
+  }, [dispatch, featuredProperties.length]);
+  
+  // Use Redux data or fallback to mock data
+  const properties = featuredProperties.length > 0 
+    ? featuredProperties.slice(0, 3).map((property: any) => ({
+        id: property.id,
+        name: property.title,
+        location: property.location.toUpperCase(),
+        price: `$${property.price},00`,
+        image: property.image || "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80&fit=crop&crop=center"
+      }))
+    : [
+        {
+          id: '1',
+          name: "The Secret Jungle Villa",
+          location: "BALI, INDONESIA",
+          price: "$290,00",
+          image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80&fit=crop&crop=center"
+        },
+        {
+          id: '2',
+          name: "Luxury Beach Resort",
+          location: "MALDIVES", 
+          price: "$450,00",
+          image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop&crop=center"
+        },
+        {
+          id: '3',
+          name: "Mountain View Retreat",
+          location: "SWISS ALPS",
+          price: "$380,00",
+          image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop&crop=center"
+        }
+      ];
 
   return (
     <div className="bg-gray-50 py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
@@ -47,7 +70,7 @@ const StayInComfortSection = () => {
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {properties.map((property) => (
+          {properties.map((property: any) => (
             <div key={property.id} className="bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
               {/* Property Image */}
               <div className="w-full h-48 sm:h-56 md:h-64 lg:h-80 overflow-hidden">

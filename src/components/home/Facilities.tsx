@@ -1,32 +1,62 @@
+"use client";
+import { useAppDispatch, useFacilities } from '@/hooks/redux';
+import { fetchFacilities } from '@/store/slices/facilitiesSlice';
 import { ArrowRight, Flower2, Gamepad2, Users, Waves } from 'lucide-react';
+import { useEffect } from 'react';
 
 const OurFacilitiesSection = () => {
-  const facilities = [
-    {
-      id: 1,
-      title: "Family Experience",
-      description: "Gravida vulputate aliquet tempor aliquam sed quam pretium non urna sed elit aenean haruetra adipiscing porttibus a adipiscing gravida vulputate aliquam aliquet eget senectus aliquam sed quam pretium.",
-      icon: Users
-    },
-    {
-      id: 2,
-      title: "Private Spa",
-      description: "Gravida vulputate aliquet tempor aliquam sed quam pretium non urna sed elit aenean haruetra adipiscing porttibus a adipiscing gravida vulputate aliquam aliquet eget senectus aliquam sed quam pretium.",
-      icon: Flower2
-    },
-    {
-      id: 3,
-      title: "Games",
-      description: "Gravida vulputate aliquet tempor aliquam sed quam pretium non urna sed elit aenean haruetra adipiscing porttibus a adipiscing gravida vulputate aliquam aliquet eget senectus aliquam sed quam pretium.",
-      icon: Gamepad2
-    },
-    {
-      id: 4,
-      title: "Water Activities",
-      description: "Gravida vulputate aliquet tempor aliquam sed quam pretium non urna sed elit aenean haruetra adipiscing porttibus a adipiscing gravida vulputate aliquam aliquet eget senectus aliquam sed quam pretium.",
-      icon: Waves
+  const dispatch = useAppDispatch();
+  const facilitiesData = useFacilities();
+  
+  useEffect(() => {
+    // Fetch facilities if not already loaded
+    if (facilitiesData.facilities.length === 0) {
+      dispatch(fetchFacilities());
     }
-  ];
+  }, [dispatch, facilitiesData.facilities.length]);
+  
+  // Use Redux data or fallback to mock data
+  const facilities = facilitiesData.facilities.length > 0 
+    ? facilitiesData.facilities.slice(0, 4).map((facility: any, index: any) => {
+        // Map to appropriate icons based on facility category or name
+        let icon = Users; // Default icon
+        if (facility.category === "Spa" || facility.name.includes("Spa")) icon = Flower2;
+        if (facility.category === "Games" || facility.name.includes("Games")) icon = Gamepad2;
+        if (facility.category === "Water" || facility.name.includes("Water")) icon = Waves;
+        
+        return {
+          id: facility.id,
+          title: facility.name,
+          description: facility.description,
+          icon: icon
+        };
+      })
+    : [
+      {
+        id: '1',
+        title: "Family Experience",
+        description: "Gravida vulputate aliquet tempor aliquam sed quam pretium non urna sed elit aenean haruetra adipiscing porttibus a adipiscing gravida vulputate aliquam aliquet eget senectus aliquam sed quam pretium.",
+        icon: Users
+      },
+      {
+        id: '2',
+        title: "Private Spa",
+        description: "Gravida vulputate aliquet tempor aliquam sed quam pretium non urna sed elit aenean haruetra adipiscing porttibus a adipiscing gravida vulputate aliquam aliquet eget senectus aliquam sed quam pretium.",
+        icon: Flower2
+      },
+      {
+        id: '3',
+        title: "Games",
+        description: "Gravida vulputate aliquet tempor aliquam sed quam pretium non urna sed elit aenean haruetra adipiscing porttibus a adipiscing gravida vulputate aliquam aliquet eget senectus aliquam sed quam pretium.",
+        icon: Gamepad2
+      },
+      {
+        id: '4',
+        title: "Water Activities",
+        description: "Gravida vulputate aliquet tempor aliquam sed quam pretium non urna sed elit aenean haruetra adipiscing porttibus a adipiscing gravida vulputate aliquam aliquet eget senectus aliquam sed quam pretium.",
+        icon: Waves
+      }
+    ];
 
   return (
     <div className="bg-white py-16 px-8">
@@ -48,7 +78,7 @@ const OurFacilitiesSection = () => {
 
         {/* Facilities List */}
         <div className="space-y-12">
-          {facilities.map((facility, index) => {
+          {facilities.map((facility: any, index: any) => {
             const IconComponent = facility.icon;
             return (
               <div key={facility.id} className="flex gap-8">

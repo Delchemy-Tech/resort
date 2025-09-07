@@ -1,15 +1,17 @@
 "use client";
+import { useAmenities, useAppDispatch } from '@/hooks/redux';
+import { fetchAmenities } from '@/store/slices/amenitiesSlice';
 import {
-  Car,
-  Dumbbell,
-  Flower2,
-  Trophy,
-  UtensilsCrossed,
-  Waves,
-  Wifi,
-  Wine
+    Car,
+    Dumbbell,
+    Flower2,
+    Trophy,
+    UtensilsCrossed,
+    Waves,
+    Wifi,
+    Wine
 } from 'lucide-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Mock data types
 interface Amenity {
@@ -18,19 +20,48 @@ interface Amenity {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-// Mock data
-const mockAmenities: Amenity[] = [
-  { id: '1', name: 'WiFi', icon: Wifi },
-  { id: '2', name: 'Parking', icon: Car },
-  { id: '3', name: 'Pool', icon: Waves },
-  { id: '4', name: 'Gym', icon: Dumbbell },
-  { id: '5', name: 'Spa', icon: Flower2 },
-  { id: '6', name: 'Restaurant', icon: UtensilsCrossed },
-  { id: '7', name: 'Bar', icon: Wine },
-  { id: '8', name: 'Tennis', icon: Trophy }
-];
+// Icon mapping function
+const getIconForAmenity = (amenityName: string) => {
+  const name = amenityName.toLowerCase();
+  if (name.includes('wifi')) return Wifi;
+  if (name.includes('parking') || name.includes('car')) return Car;
+  if (name.includes('pool') || name.includes('water')) return Waves;
+  if (name.includes('gym') || name.includes('fitness')) return Dumbbell;
+  if (name.includes('spa')) return Flower2;
+  if (name.includes('restaurant') || name.includes('dining')) return UtensilsCrossed;
+  if (name.includes('bar') || name.includes('wine')) return Wine;
+  if (name.includes('tennis') || name.includes('sport')) return Trophy;
+  return Wifi; // Default icon
+};
 
 const OtherAmenities: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const amenitiesData = useAmenities();
+  
+  useEffect(() => {
+    // Fetch amenities if not already loaded
+    if (amenitiesData.amenities.length === 0) {
+      dispatch(fetchAmenities());
+    }
+  }, [dispatch, amenitiesData.amenities.length]);
+  
+  // Use Redux data or fallback to mock data
+  const amenities = amenitiesData.amenities.length > 0 
+    ? amenitiesData.amenities.slice(0, 8).map((amenity: any, index: any) => ({
+        id: amenity.id,
+        name: amenity.name,
+        icon: getIconForAmenity(amenity.name)
+      }))
+    : [
+      { id: '1', name: 'WiFi', icon: Wifi },
+      { id: '2', name: 'Parking', icon: Car },
+      { id: '3', name: 'Pool', icon: Waves },
+      { id: '4', name: 'Gym', icon: Dumbbell },
+      { id: '5', name: 'Spa', icon: Flower2 },
+      { id: '6', name: 'Restaurant', icon: UtensilsCrossed },
+      { id: '7', name: 'Bar', icon: Wine },
+      { id: '8', name: 'Tennis', icon: Trophy }
+    ];
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -42,7 +73,7 @@ const OtherAmenities: React.FC = () => {
         </p>
         
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8">
-          {mockAmenities.map((amenity) => {
+          {amenities.map((amenity: any) => {
             const IconComponent = amenity.icon;
             return (
               <div key={amenity.id} className="flex flex-col items-center group cursor-pointer">

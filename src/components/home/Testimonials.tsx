@@ -1,30 +1,52 @@
+"use client";
+import { useAppDispatch, useFeaturedTestimonials } from '@/hooks/redux';
+import { fetchTestimonials } from '@/store/slices/testimonialsSlice';
 import { ArrowRight, StarIcon } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Card, CardContent } from "./ui/card";
 
-const testimonials = [
-  {
-    id: 1,
-    title: "Awesome Services!",
-    content:
-      "Gravida vulputate aliquet tempor siteque sed quam pretium non urna sed etid aene haretra adipiscing penatibus a adipiscing gravida vulputate elemen aliquet eget senectus siteque sed quam pretium.",
-    author: "ANNA JACKSON",
-    role: "TRAVELLER",
-    rating: 5,
-  },
-  {
-    id: 2,
-    title: "Recommendations Of Everything!",
-    content:
-      "Gravida vulputate aliquet tempor siteque sed quam pretium non urna sed etid aene haretra adipiscing penatibus a adipiscing gravida vulputate elemen aliquet eget senectus siteque sed quam pretium.",
-    author: "JAMES MASON",
-    role: "FREELANCER",
-    rating: 5,
-  },
-];
-
 const CustomerTestimonialsSection: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const featuredTestimonials = useFeaturedTestimonials();
+  
+  useEffect(() => {
+    // Fetch testimonials if not already loaded
+    if (featuredTestimonials.length === 0) {
+      dispatch(fetchTestimonials());
+    }
+  }, [dispatch, featuredTestimonials.length]);
+  
+  // Use Redux data or fallback to mock data
+  const testimonials = featuredTestimonials.length > 0 
+    ? featuredTestimonials.slice(0, 2).map((testimonial: any) => ({
+        id: testimonial.id,
+        title: "Amazing Experience!", // Could be extracted from comment or added to testimonial model
+        content: testimonial.comment,
+        author: testimonial.name.toUpperCase(),
+        role: "VERIFIED GUEST", // Could be added to testimonial model
+        rating: testimonial.rating,
+      }))
+    : [
+        {
+          id: '1',
+          title: "Awesome Services!",
+          content:
+            "Gravida vulputate aliquet tempor siteque sed quam pretium non urna sed etid aene haretra adipiscing penatibus a adipiscing gravida vulputate elemen aliquet eget senectus siteque sed quam pretium.",
+          author: "ANNA JACKSON",
+          role: "TRAVELLER",
+          rating: 5,
+        },
+        {
+          id: '2',
+          title: "Recommendations Of Everything!",
+          content:
+            "Gravida vulputate aliquet tempor siteque sed quam pretium non urna sed etid aene haretra adipiscing penatibus a adipiscing gravida vulputate elemen aliquet eget senectus siteque sed quam pretium.",
+          author: "JAMES MASON",
+          role: "FREELANCER",
+          rating: 5,
+        },
+      ];
   return (
     <div className="bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -56,7 +78,7 @@ const CustomerTestimonialsSection: React.FC = () => {
           <div className="absolute -bottom-16 left-0 right-0 px-6 lg:px-12">
             <div className="max-w-5xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 justify-items-center">
-                {testimonials.slice(0, 1).map((testimonial) => (
+                {testimonials.slice(0, 1).map((testimonial: any) => (
                   <Card
                     key={testimonial.id}
                     className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 h-fit md:block"
@@ -95,7 +117,7 @@ const CustomerTestimonialsSection: React.FC = () => {
                           <AvatarFallback className="bg-gray-400 text-white font-semibold text-sm">
                             {testimonial.author
                               .split(" ")
-                              .map((name) => name[0])
+                              .map((name: any) => name[0])
                               .join("")}
                           </AvatarFallback>
                         </Avatar>
@@ -115,7 +137,7 @@ const CustomerTestimonialsSection: React.FC = () => {
                 
                 {/* Second card - only show on lg screens and above */}
                 <div className="hidden lg:block">
-                  {testimonials.slice(1, 2).map((testimonial) => (
+                  {testimonials.slice(1, 2).map((testimonial: any) => (
                     <Card
                       key={testimonial.id}
                       className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 h-fit"
@@ -154,7 +176,7 @@ const CustomerTestimonialsSection: React.FC = () => {
                             <AvatarFallback className="bg-gray-400 text-white font-semibold text-sm">
                               {testimonial.author
                                 .split(" ")
-                                .map((name) => name[0])
+                                .map((name: any) => name[0])
                                 .join("")}
                             </AvatarFallback>
                           </Avatar>
